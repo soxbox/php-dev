@@ -1,0 +1,21 @@
+version: '3'
+services:
+  alpine-web:
+    container_name: alpine web
+    build: .
+    tty: true
+    ports:
+      - '8080:80'
+    volumes:
+      - ..:/app
+      - ~/Box Sync/Sox Box/Customer_Imports:/import
+    environment:
+      XDEBUG_CONFIG: remote_host=host.docker.internal remote_port=9002 remote_enable=1
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - '3307:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: bUC6QLxc
